@@ -1,0 +1,365 @@
+/* ───────── Базовая структура ───────── */
+body {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  background-color: #f9fafb;
+  color: #111827;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.app {
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.todos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* ───────── Todo Form ───────── */
+.todo-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.todo-input,
+.deadline-input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s;
+}
+
+.todo-input:focus,
+.deadline-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.add-button {
+  padding: 12px 16px;
+  background-color: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.add-button:hover {
+  background-color: #4f46e5;
+}
+
+/* ───────── Todo Item ───────── */
+.todo-item-wrapper {
+  padding: 16px;
+  border-radius: 10px;
+  background-color: #f3f4f6;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 15px;
+  width: 15px;
+  background-color: #fff;
+  border: 2px solid #bbb;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #4CAF50;
+  border-color: #4CAF50;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkbox-container .checkmark:after {
+  left: 5px;
+  top: 1px;
+  width: 4px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+
+/* ───────── Анимации (framer-motion fallback) ───────── */
+.todo-item-wrapper.appearing {
+  animation: fadeInUp 0.3s ease;
+}
+
+.todo-item-wrapper.removing {
+  animation: fadeOutUp 0.4s ease forwards;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 120px;
+    margin-bottom: 12px;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+    max-height: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+/* ───────── Фильтры ───────── */
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.ghost-button {
+  background: none;
+  border: 1px solid #6366f1;
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: #6366f1;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.ghost-button.active,
+.ghost-button:hover {
+  background-color: rgba(99, 102, 241, 0.1);
+}
+
+/* ───────── Пустой список ───────── */
+.empty-message {
+  text-align: center;
+  padding: 24px 0;
+  font-size: 17px;
+  color: #6b7280;
+}
+
+/* ───────── Тёмная тема ───────── */
+body.dark {
+  background-color: #1e1e1e;
+  color: #f3f4f6;
+}
+
+body.dark .todos-container {
+  background-color: #2c2c2c;
+}
+
+body.dark .todo-item-wrapper {
+  background-color: #333;
+}
+
+body.dark .todo-input,
+body.dark .deadline-input {
+  background: #444;
+  color: #fff;
+  border-color: #555;
+}
+
+body.dark .todo-input:focus,
+body.dark .deadline-input:focus {
+  border-color: #818cf8;
+  box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.2);
+}
+
+body.dark .add-button {
+  background-color: #6366f1;
+  color: #fff;
+}
+
+body.dark .ghost-button {
+  border-color: #a5b4fc;
+  color: #a5b4fc;
+}
+
+body.dark .ghost-button:hover {
+  background-color: #374151;
+}
+
+body.dark .empty-message {
+  color: #aaa;
+}
+
+/* ========== Mobile & Tablet Responsive Design ========== */
+@media (max-width: 768px) {
+  .app {
+    padding: 16px;
+  }
+
+  .todo-form {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .todo-input,
+  .deadline-input,
+  .add-button {
+    width: 100%;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  .todo-item-wrapper {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .todo-item-wrapper > div {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .filter-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .add-button {
+    text-align: center;
+    padding: 12px;
+  }
+
+  .empty-message {
+    font-size: 15px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-button,
+  .todo-input,
+  .deadline-input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .todo-item-wrapper {
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  .ghost-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .empty-message {
+    font-size: 14px;
+  }
+  .filter-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+}
+
+/* ───────── Минималистичная анимация кнопок ───────── */
+.add-button {
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.add-button:hover {
+  transform: translateY(-1px);
+}
+
+.ghost-button {
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.ghost-button:hover {
+  background-color: rgba(99, 102, 241, 0.08);
+  transform: translateY(-1px);
+}
+
+/* Отличия "Добавить" и "Очистить" */
+.add-button.primary {
+  background-color: #6366f1;
+  color: #fff;
+}
+
+.add-button.primary:hover {
+  background-color: #4f46e5;
+}
+
+.add-button.secondary {
+  background-color: #e5e7eb;
+  color: #333;
+}
+
+.add-button.secondary:hover {
+  background-color: #d1d5db;
+}
+
+

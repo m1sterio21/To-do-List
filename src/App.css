@@ -1,0 +1,93 @@
+:root {
+  --border-radius: 8px;
+  /* Light Theme */
+  --light-bg: #ffffff;
+  --light-text: #37352f;
+  --light-secondary: #5a5a5a;
+  --light-primary: #2eaadc;
+  --light-hover: #f1f1ef;
+  --light-border: #e0e0e0;
+  --light-checkbox: #2eaadc;
+  --light-overdue: #ff5b5b;
+  --light-card: #f7f6f3;
+
+  /* Dark Theme */
+  --dark-bg: #191919;
+  --dark-text: #e0e0e0;
+  --dark-secondary: #a0a0a0;
+  --dark-primary: #4a9fc9;
+  --dark-hover: #2a2a2a;
+  --dark-border: #3a3a3a;
+  --dark-checkbox: #4a9fc9;
+  --dark-overdue: #ff7b7b;
+  --dark-card: #252525;
+}
+
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+.app.light {
+  background-color: var(--light-bg);
+  color: var(--light-text);
+}
+
+.app.dark {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.theme-toggle.light {
+  color: var(--light-text);
+}
+
+.theme-toggle.dark {
+  color: var(--dark-text);
+}
+
+.theme-toggle:hover {
+  background-color: rgba(0,0,0,0.1);
+}
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.todo-item {
+  border-radius: var(--border-radius);
+}
+
+.todo-form input,
+.todo-form button,
+.filter-buttons button {
+  border-radius: var(--border-radius);
+}
