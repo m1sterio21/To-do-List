@@ -1,37 +1,40 @@
 import React from 'react';
-import './styles.css';
+import {
+  FILTER_ALL,
+  FILTER_ACTIVE,
+  FILTER_COMPLETED
+} from '../themes';
 
-const FilterButtons = ({ filter, setFilter, activeTodosCount, clearCompleted }) => {
+function FilterButtons({ filter, setFilter, activeTodosCount, clearCompleted, theme }) {
   return (
     <div className="filter-buttons">
-      <span className="filter-count">{activeTodosCount} задач осталось</span>
-
-      <div className="filter-group">
-        <button
-          className={`ghost-button ${filter === 'all' ? 'active' : ''}`}
-          onClick={() => setFilter('all')}
-        >
-          Все
-        </button>
-        <button
-          className={`ghost-button ${filter === 'active' ? 'active' : ''}`}
-          onClick={() => setFilter('active')}
-        >
-          Активные
-        </button>
-        <button
-          className={`ghost-button ${filter === 'completed' ? 'active' : ''}`}
-          onClick={() => setFilter('completed')}
-        >
-          Завершённые
-        </button>
-      </div>
-
-      <button className="add-button secondary" onClick={clearCompleted}>
+      <span>{activeTodosCount} задач осталось</span>
+      <button
+        className={`ghost-button ${filter === FILTER_ALL ? 'active' : ''}`}
+        onClick={() => setFilter(FILTER_ALL)}
+      >
+        Все
+      </button>
+      <button
+        className={`ghost-button ${filter === FILTER_ACTIVE ? 'active' : ''}`}
+        onClick={() => setFilter(FILTER_ACTIVE)}
+      >
+        Активные
+      </button>
+      <button
+        className={`ghost-button ${filter === FILTER_COMPLETED ? 'active' : ''}`}
+        onClick={() => setFilter(FILTER_COMPLETED)}
+      >
+        Завершённые
+      </button>
+      <button 
+        className="clear-completed-button"
+        onClick={clearCompleted}
+      >
         Очистить выполненные
       </button>
     </div>
   );
-};
+}
 
 export default FilterButtons;

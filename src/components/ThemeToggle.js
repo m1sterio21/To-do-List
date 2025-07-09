@@ -1,28 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { LIGHT_THEME, DARK_THEME } from '../themes';
 
-const ThemeToggle = ({ theme, setTheme }) => {
+function ThemeToggle({ theme, setTheme }) {
+  useEffect(() => {
+    document.body.classList.remove(LIGHT_THEME, DARK_THEME);
+    document.body.classList.add(theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    setTheme(theme === LIGHT_THEME ? DARK_THEME : LIGHT_THEME);
   };
 
   return (
-    <button
-      onClick={toggleTheme}
-      title={`Переключить на ${theme === 'light' ? 'тёмную' : 'светлую'} тему`}
-      style={{
-        fontSize: '20px',
-        padding: '8px 12px',
-        borderRadius: '8px',
-        border: 'none',
-        backgroundColor: 'transparent',
-        cursor: 'pointer',
-        transition: 'all 0.2s ease',
-        color: theme === 'dark' ? '#fff' : '#000'
-      }}
-    >
-      {theme === 'light' ? '🌙' : '☀️'}
+    <button onClick={toggleTheme} className="theme-toggle" title="Сменить тему">
+      {theme === LIGHT_THEME ? '🌙' : '🌞'}
     </button>
   );
-};
+}
 
 export default ThemeToggle;

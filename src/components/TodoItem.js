@@ -31,15 +31,6 @@ const TodoItem = ({
     setTimeout(() => deleteTodo(todo.id), 400);
   };
 
-  const textColor =
-    theme === 'dark'
-      ? todo.completed
-        ? '#777'
-        : '#f0f0f0'
-      : todo.completed
-      ? '#999'
-      : '#333';
-
   return (
     <AnimatePresence>
       {!removing && (
@@ -48,7 +39,7 @@ const TodoItem = ({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -16 }}
           transition={{ duration: 0.3 }}
-          className={`todo-item-wrapper sortable-transition ${isNew ? 'appearing' : ''}`}
+          className={`todo-item-wrapper ${isNew ? 'appearing' : ''}`}
         >
           {isEditing ? (
             <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
@@ -64,26 +55,18 @@ const TodoItem = ({
                   }
                 }}
               />
-
               <button className="add-button" onClick={handleSave}>
                 Сохранить
               </button>
               <button
-                className="add-button"
-                style={{ background: '#e5e7eb', color: '#333' }}
+                className="add-button secondary"
                 onClick={handleCancel}
               >
                 Отмена
               </button>
             </div>
           ) : (
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-              }}
-            >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <label className="checkbox-container">
                   <input
@@ -96,7 +79,7 @@ const TodoItem = ({
                 <span
                   style={{
                     textDecoration: todo.completed ? 'line-through' : 'none',
-                    color: textColor
+                    color: todo.completed ? '#888' : 'inherit'
                   }}
                 >
                   {todo.text}

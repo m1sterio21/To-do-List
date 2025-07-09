@@ -6,36 +6,43 @@ import FilterButtons from './components/FilterButtons';
 import ThemeToggle from './components/ThemeToggle';
 import './App.css';
 
+import {
+  LIGHT_THEME,
+  DARK_THEME,
+  FILTER_ALL,
+  FILTER_ACTIVE,
+  FILTER_COMPLETED,
+  STORAGE_TODOS_KEY,
+  STORAGE_THEME_KEY,
+  TODO_ADDED_MESSAGE
+} from './themes';
+
+import Todo from './models/Todo';
+
 function App() {
   const [todos, setTodos] = useState([]);
-  const [filter, setFilter] = useState('all');
-  const [theme, setTheme] = useState('light');
+  const [filter, setFilter] = useState(FILTER_ALL);
+  const [theme, setTheme] = useState(LIGHT_THEME);
   const [lastAddedId, setLastAddedId] = useState(null);
 
   useEffect(() => {
-    const savedTodos = localStorage.getItem('todos');
-    const savedTheme = localStorage.getItem('theme');
+    const savedTodos = localStorage.getItem(STORAGE_TODOS_KEY);
+    const savedTheme = localStorage.getItem(STORAGE_THEME_KEY);
     if (savedTodos) setTodos(JSON.parse(savedTodos));
     if (savedTheme) setTheme(savedTheme);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-    localStorage.setItem('theme', theme);
-    document.body.className = theme === 'dark' ? 'dark' : '';
+    localStorage.setItem(STORAGE_TODOS_KEY, JSON.stringify(todos));
+    localStorage.setItem(STORAGE_THEME_KEY, theme);
+    document.body.className = theme === DARK_THEME ? 'dark' : '';
   }, [todos, theme]);
 
   const addTodo = (text, deadline) => {
-    const newTodo = {
-      id: Date.now(),
-      text,
-      completed: false,
-      createdAt: new Date().toISOString(),
-      deadline: deadline || null
-    };
+    const newTodo = new Todo({ text, deadline });
     setTodos([...todos, newTodo]);
     setLastAddedId(newTodo.id);
-    toast.success('Задача добавлена ✅');
+    toast.success(TODO_ADDED_MESSAGE);
   };
 
   const toggleTodo = (id) => {
@@ -64,8 +71,8 @@ function App() {
 
   const filteredTodos = todos
     .filter(todo => {
-      if (filter === 'active') return !todo.completed;
-      if (filter === 'completed') return todo.completed;
+      if (filter === FILTER_ACTIVE) return !todo.completed;
+      if (filter === FILTER_COMPLETED) return todo.completed;
       return true;
     })
     .sort((a, b) => {
