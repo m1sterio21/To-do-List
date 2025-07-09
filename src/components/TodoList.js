@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import TodoItem from './TodoItem';
 import {
   DndContext,
@@ -39,7 +39,7 @@ function SortableTodo({ todo, index, theme, isNew, ...props }) {
   );
 }
 
-const TodoList = ({ todos, toggleTodo, deleteTodo, updateTodo, reorderTodos, theme, lastAddedId }) => {
+const TodoList = memo(({ todos, toggleTodo, deleteTodo, updateTodo, reorderTodos, theme, lastAddedId }) => {
   const [editingId, setEditingId] = useState(null);
 
   const sensors = useSensors(
@@ -87,6 +87,7 @@ const TodoList = ({ todos, toggleTodo, deleteTodo, updateTodo, reorderTodos, the
       </SortableContext>
     </DndContext>
   );
-};
+}, (prevProps, nextProps) => {
+});
 
 export default TodoList;

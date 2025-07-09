@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { LIGHT_THEME, DARK_THEME } from '../themes';
 
-function ThemeToggle({ theme, setTheme }) {
+const ThemeToggle = memo(({ theme, setTheme }) => {
   useEffect(() => {
     document.body.classList.remove(LIGHT_THEME, DARK_THEME);
     document.body.classList.add(theme);
@@ -17,6 +17,6 @@ function ThemeToggle({ theme, setTheme }) {
       {theme === LIGHT_THEME ? '🌙' : '🌞'}
     </button>
   );
-}
+});
 
 export default ThemeToggle;

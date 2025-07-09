@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import "./styles.css";
 
-const TodoItem = ({
+const TodoItem = memo(({
   todo,
   toggleTodo,
   deleteTodo,
@@ -103,6 +103,6 @@ const TodoItem = ({
       )}
     </AnimatePresence>
   );
-};
+});
 
 export default TodoItem;

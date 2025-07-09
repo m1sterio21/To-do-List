@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import './styles.css';
 
-const TodoForm = ({ addTodo, theme }) => {
+const TodoForm = memo(({ addTodo, theme }) => {
   const [text, setText] = useState('');
   const [deadline, setDeadline] = useState('');
 
@@ -33,6 +33,6 @@ const TodoForm = ({ addTodo, theme }) => {
       </button>
     </form>
   );
-};
+});
 
 export default TodoForm;

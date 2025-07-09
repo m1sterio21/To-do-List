@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
   FILTER_ALL,
   FILTER_ACTIVE,
   FILTER_COMPLETED
 } from '../themes';
 
-function FilterButtons({ filter, setFilter, activeTodosCount, clearCompleted, theme }) {
+const FilterButtons = memo(({ filter, setFilter, activeTodosCount, clearCompleted, theme }) => {
   return (
     <div className="filter-buttons">
       <span>{activeTodosCount} задач осталось</span>
@@ -35,6 +35,6 @@ function FilterButtons({ filter, setFilter, activeTodosCount, clearCompleted, th
       </button>
     </div>
   );
-}
+});
 
 export default FilterButtons;

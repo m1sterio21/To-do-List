@@ -11,7 +11,5 @@ const savedTheme = localStorage.getItem('theme') || 'light';
 document.body.className = savedTheme;
 
 root.render(
-  //<React.StrictMode>
     <App />
-  //</React.StrictMode>
 );
