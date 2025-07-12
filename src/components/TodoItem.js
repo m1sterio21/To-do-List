@@ -105,4 +105,4 @@ const TodoItem = memo(({
   );
 });
 
-export default TodoItem;
+export default memo(TodoItem);
