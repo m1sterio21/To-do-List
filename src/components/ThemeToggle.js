@@ -14,7 +14,7 @@ const ThemeToggle = memo(({ theme, setTheme }) => {
 
   return (
     <button onClick={toggleTheme} className="theme-toggle" title="Сменить тему">
-      {theme === LIGHT_THEME ? '🌙' : '🌞'}
+      {theme === LIGHT_THEME ? '🌕' : '☀️'}
     </button>
   );
 });
