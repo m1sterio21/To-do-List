@@ -19,4 +19,4 @@ const ThemeToggle = memo(({ theme, setTheme }) => {
   );
 });
 
-export default ThemeToggle;
+export default memo(ThemeToggle);
